@@ -83,7 +83,7 @@ exports.creatBlog=async(req,res,next)=>{
                         title:title,
                         content:pasContent,
                         createdBy:users,
-                        image: url + '/public/' + req.file.filename,
+                        image: '/public/' + req.file.filename,
                         createdBy:userInfo.id
                     })
             
