@@ -67,6 +67,7 @@ exports.upload=multer({
 
 exports.creatBlog=async(req,res,next)=>{
     const url = req.protocol + '://' + req.get('host')
+    
     const {category,title,content,users}=req.body
     const pasContent=content
     // console.log(req.user)
@@ -200,10 +201,10 @@ exports.loginUser=async(req,res)=>{
                 // const userId=user._id.toString()
                 jwt.sign({username:user.username,id:user._id},process.env.JWT_SECRET,{},(err,token)=>{
                     if(err){
-                        console.log(err)
+                        // console.log(err)
                         res.status(401).json({Error:'Error'})
                     }else{
-                        console.log(token)
+                        // console.log(token)
                         res.cookie("token",token,{ expiresIn:'10m'}).json('ok')
                         
                     }
@@ -225,13 +226,13 @@ exports.loginUser=async(req,res)=>{
     }
 }
 exports.userProfile=async(req,res)=>{
-   const token=req.cookies.token
+   const token= await req.cookies.token
    
     
    if(token){
         jwt.verify(token,process.env.JWT_SECRET,(err,userInfo)=>{
             if(userInfo){
-                console.log(userInfo)
+                // console.log(userInfo)
                 res.json(userInfo)
             }else{
                 console.log(err)
@@ -243,7 +244,7 @@ exports.userProfile=async(req,res)=>{
 }
 
 exports.logoutUser=async(req,res)=>{
-    console.log('hello')
+    // console.log('hello')
     res.cookie('token','',{
         maxAge:1,
     })

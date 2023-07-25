@@ -11,7 +11,7 @@ exports.authMiddleware=async(req,res,next)=>{
              if(userInfo){
                  next()
              }else{
-                 console.log(err)
+                 res.send('Login to Make Comment')
              }
          })
     }
